@@ -1,13 +1,6 @@
-import React, { useState } from "react";
-import {
-  useNavigate,
-  useLoaderData,
-  useActionData,
-  Form,
-} from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import {
-  Alert,
   Avatar,
   Typography,
   Grid,
@@ -17,6 +10,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import backgroundImage from "../assets/login-image.jpg";
 
 export const meta = () => {
   return [
@@ -41,7 +35,22 @@ export default function Index() {
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} />
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={7}
+        sx={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundRepeat: "repeat",
+          backgroundColor: (t) =>
+            t.palette.mode === "light"
+              ? t.palette.grey[50]
+              : t.palette.grey[900],
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Typography
           variant="h2"
@@ -103,13 +112,6 @@ export default function Index() {
               Log In
             </Button>
           </Form>
-          {/* {loginError && (
-            <>
-              <Alert severity="error">
-                Your log in credentials are incorrect!
-              </Alert>
-            </>
-          )} */}
         </Box>
       </Grid>
     </Grid>

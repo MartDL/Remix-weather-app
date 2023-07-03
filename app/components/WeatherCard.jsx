@@ -1,4 +1,4 @@
-import { CardContent, Typography, Card, Button } from "@mui/material";
+import { CardContent, Typography, Card } from "@mui/material";
 import { useActionData } from "@remix-run/react";
 
 export const WeatherCard = () => {
@@ -15,17 +15,11 @@ export const WeatherCard = () => {
               justifyContent: "space-between",
             }}
           >
-            {/* <img
-              src={weatherData.current.condition.icon}
+            <img
+              src={data.current.condition.icon}
               alt="Image"
-              style={{ width: '50%' }}
-            /> */}
-            <Button
-              onClick={() => {}}
-              sx={{ borderRadius: "50px", width: "20px", color: "#888" }}
-            >
-              {/* <CloseIcon /> */}
-            </Button>
+              style={{ width: "50%" }}
+            />
           </div>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -38,10 +32,10 @@ export const WeatherCard = () => {
               Temperature: {data.current.temp_c}C
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              humidity: {data.current.humidity} C
+              Humidity: {data.current.humidity} C
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              precipitation: {data.current.precip_mm} C
+              Precipitation: {data.current.precip_mm} C
             </Typography>
           </CardContent>
         </Card>

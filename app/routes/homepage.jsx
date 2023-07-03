@@ -3,8 +3,8 @@ import {
   useLoaderData,
   useRouteLoaderData,
 } from "@remix-run/react";
-import { WeatherCard } from "../components/WeatherCard";
 import { Typography, Alert, TextField, Button, Container } from "@mui/material";
+import { WeatherCard } from "../components/WeatherCard";
 
 export const action = async ({ request }) => {
   const form = await request.formData();
@@ -25,10 +25,9 @@ function homepage() {
 
   // access the data from a loader
   const data = useLoaderData();
-  console.log("data", data);
 
+  // access data from an action
   const actionData = useActionData();
-  console.log("actionData", actionData);
 
   return (
     <>
@@ -54,7 +53,6 @@ function homepage() {
           align="center"
           severity="success"
           m={2}
-          onClose={() => {}}
           sx={{ width: "fit-content" }}
         >
           Welcome to the Weather App {user.username}!
@@ -69,7 +67,7 @@ function homepage() {
           component="div"
           sx={{ flexGrow: 1, margin: "30px 0 10px 0" }}
         >
-          Please select up to 5 cities to view.
+          Please select to a city.
         </Typography>
         <form method="post">
           <TextField
@@ -77,6 +75,7 @@ function homepage() {
             label="Enter city"
             variant="outlined"
             name="city"
+            size="small"
           />
           <Button
             type="submit"
@@ -95,9 +94,6 @@ function homepage() {
           </Button>
         </form>
         <WeatherCard />
-        {/* {data.locations.map((city, index) => (
-          <WeatherCard key={index} city={city} />
-        ))} */}
       </Container>
     </>
   );
