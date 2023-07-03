@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, useLoaderData, json } from "@remix-run/react";
+import {
+  useNavigate,
+  useLoaderData,
+  useActionData,
+  Form,
+} from "@remix-run/react";
+import { redirect } from "@remix-run/node";
 import {
   Alert,
   Avatar,
@@ -19,33 +25,19 @@ export const meta = () => {
   ];
 };
 
-export const loader = () => {
-  const user = { username: "ipgautomotive", password: "carmaker" };
-  return user;
+export const action = async ({ request }) => {
+  const form = await request.formData();
+  const username = form.get("username");
+  const password = form.get("password");
+
+  if (username === "ipgautomotive" && password === "carmaker") {
+    return redirect("/homepage");
+  } else {
+    return null;
+  }
 };
 
 export default function Index() {
-  const [loginError, setLoginError] = useState(true);
-  const user = useLoaderData();
-  console.log("user", user);
-  const navigate = useNavigate();
-
-  const handleValidateUser = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    let user = {
-      username: data.get("username"),
-      password: data.get("password"),
-    };
-
-    if (user.username === "ipgautomotive" && user.password === "carmaker") {
-      navigate("/homepage");
-      setLoginError(false);
-    } else {
-      setLoginError(true);
-    }
-  };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -81,12 +73,7 @@ export default function Index() {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleValidateUser}
-            sx={{ mt: 1 }}
-          >
+          <Form method="post">
             <TextField
               margin="normal"
               required
@@ -115,14 +102,14 @@ export default function Index() {
             >
               Log In
             </Button>
-          </Box>
-          {loginError && (
+          </Form>
+          {/* {loginError && (
             <>
               <Alert severity="error">
                 Your log in credentials are incorrect!
               </Alert>
             </>
-          )}
+          )} */}
         </Box>
       </Grid>
     </Grid>
