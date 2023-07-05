@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import {
   Avatar,
@@ -9,8 +9,10 @@ import {
   CssBaseline,
   TextField,
   Button,
+  Alert,
 } from "@mui/material";
 import backgroundImage from "../assets/login-image.jpg";
+import { getUser, storeUser } from "~/utils/users";
 
 export const meta = () => {
   return [
@@ -25,13 +27,27 @@ export const action = async ({ request }) => {
   const password = form.get("password");
 
   if (username === "ipgautomotive" && password === "carmaker") {
+    const user = {
+      username,
+      password,
+    };
+    await storeUser(user);
     return redirect("/homepage");
   } else {
-    return null;
+    return { message: "Invalid user credentials!" };
   }
 };
 
+export const loader = async () => {
+  const users = await getUser();
+  return users;
+};
+
 export default function Index() {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+  const data = useActionData();
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -104,6 +120,7 @@ export default function Index() {
               autoComplete="current-password"
             />
             <Button
+              disabled={isSubmitting}
               type="submit"
               fullWidth
               variant="contained"
@@ -112,6 +129,11 @@ export default function Index() {
               Log In
             </Button>
           </Form>
+          {data && (
+            <>
+              <Alert severity="error">{data.message}</Alert>
+            </>
+          )}
         </Box>
       </Grid>
     </Grid>

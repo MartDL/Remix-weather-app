@@ -1,8 +1,14 @@
-import { CardContent, Typography, Card } from "@mui/material";
-import { useActionData } from "@remix-run/react";
+import { CardContent, Typography, Card, Button } from "@mui/material";
+import { useLoaderData, Form } from "@remix-run/react";
+import CloseIcon from "@mui/icons-material/Close";
 
-export const WeatherCard = () => {
-  const data = useActionData();
+export const loader = async () => {
+  const locations = await getStoredLocations();
+  return locations;
+};
+
+export const WeatherCard = ({ data }) => {
+  const locations = useLoaderData();
 
   return (
     data && (
@@ -20,6 +26,17 @@ export const WeatherCard = () => {
               alt="Image"
               style={{ width: "50%" }}
             />
+            <Form method="post">
+              <input type="hidden" name="id" value={data.location.name} />
+              <Button
+                type="submit"
+                name="_action"
+                value="deleteCity"
+                sx={{ borderRadius: "50px", width: "20px", color: "#888" }}
+              >
+                <CloseIcon />
+              </Button>
+            </Form>
           </div>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
