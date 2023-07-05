@@ -7,11 +7,6 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-export const loader = () => {
-  const user = { username: "ipgautomotive", password: "carmaker" };
-  return user;
-};
-
 export default function App() {
   return (
     <html lang="en">

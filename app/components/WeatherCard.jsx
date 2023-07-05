@@ -1,15 +1,8 @@
 import { CardContent, Typography, Card, Button } from "@mui/material";
-import { useLoaderData, Form } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 import CloseIcon from "@mui/icons-material/Close";
 
-export const loader = async () => {
-  const locations = await getStoredLocations();
-  return locations;
-};
-
 export const WeatherCard = ({ data }) => {
-  const locations = useLoaderData();
-
   return (
     data && (
       <div>

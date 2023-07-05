@@ -16,8 +16,8 @@ import { getUser, storeUser } from "~/utils/users";
 
 export const meta = () => {
   return [
-    { title: "Weather App" },
-    { name: "description", content: "Weather App!" },
+    { title: "Log in to Weather App" },
+    { name: "description", content: "Weather App log in" },
   ];
 };
 

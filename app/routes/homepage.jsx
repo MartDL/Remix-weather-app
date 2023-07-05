@@ -17,6 +17,13 @@ import {
 import { getUser, storeUser } from "~/utils/users";
 import { useEffect, useRef } from "react";
 
+export const meta = () => {
+  return [
+    { title: "Weather App" },
+    { name: "description", content: "Weather App!" },
+  ];
+};
+
 export const action = async ({ request }) => {
   // TODO: move apiKey to .env
   const apiKey = "146c9c424f0d4006836143440232806";
