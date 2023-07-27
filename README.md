@@ -1,4 +1,8 @@
-# Welcome to Remix!
+# Weather app built with Remix!
+
+## This app is to demonstrate the features of Remix (UI is unstyled).  
+
+Remix is a seamless server and browser runtime that provides snappy page loads and instant transitions by leveraging distributed systems and native browser features instead of clunky static builds. Built on the Web Fetch API (instead of Node) it can run anywhere. It already runs natively on Cloudflare Workers, and of course supports serverless and traditional Node.js environments, so you can come as you are.
 
 - [Remix Docs](https://remix.run/docs)
 
